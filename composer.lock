@@ -1,0 +1,59 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "a75855ba5c8aa0f572d8d0c27a87c81b",
+    "packages": [
+        {
+            "name": "megumi/switch_theme",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/miya0001/switch_theme.git",
+                "reference": "49cebd8c1973e0aa15bdbd82579171cc580e29cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/miya0001/switch_theme/zipball/49cebd8c1973e0aa15bdbd82579171cc580e29cb",
+                "reference": "49cebd8c1973e0aa15bdbd82579171cc580e29cb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Megumi_SwitchTheme": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL2"
+            ],
+            "description": "Class for switch WordPress theme",
+            "keywords": [
+                "theme",
+                "wordpress"
+            ],
+            "time": "2013-11-01 21:19:43"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "megumi/switch_theme": 20
+    },
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}
