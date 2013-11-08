@@ -4,9 +4,9 @@ if (!class_exists('Megumi_SwitchTheme')):
 
 class Megumi_SwitchTheme {
 
-private $name = null;
-private $dir  = null;
-private $url  = null;
+private $theme = null;
+private $dir   = null;
+private $url   = null;
 
 /*
  * The constructor.
@@ -17,12 +17,17 @@ private $url  = null;
  */
 function __construct($name, $dir = null, $uri = null)
 {
-    $this->name = $name;
+    $this->theme = wp_get_theme($name);
+    if (!$this->theme->exists()) {
+        $this->theme = wp_get_theme();
+    }
+
     if ($dir) {
         $this->dir = $dir;
     } else {
         $this->dir = get_theme_root();
     }
+
     if ($uri) {
         $this->uri = $uri;
     } else {
@@ -37,25 +42,30 @@ function __construct($name, $dir = null, $uri = null)
  */
 public function apply()
 {
-    add_filter("stylesheet", array($this, "template"));
+    add_filter("stylesheet", array($this, "stylesheet"));
     add_filter("template", array($this, "template"));
     add_filter("theme_root", array($this, "theme_root"));
     add_filter("theme_root_uri", array($this, "theme_root_uri"));
 }
 
 /*
- * Fire when template hook.
+ * Filter the child theme directory.
  *
- * @param  string $name Slug of the theme
- * @return string Customized theme slug.
+ * @return string Child theme directory name.
  */
-public function template($name)
+public function stylesheet()
 {
-    if ($this->name) {
-        return $this->name;
-    } else {
-        return $name;
-    }
+    return $this->theme->get_stylesheet();
+}
+
+/*
+ * Filter the parent theme directory.
+ *
+ * @return string Parent theme directory name.
+ */
+public function template()
+{
+    return $this->theme->get_template();
 }
 
 /*

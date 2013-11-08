@@ -4,10 +4,10 @@ Plugin Name: Nginx Mobile Theme
 Plugin URI: http://ninjax.cc/
 Description: This plugin allows you to switch theme according to the User Agent on the Nginx reverse proxy.
 Author: miyauchi, megumithemes
-Version: 1.0.0
+Version: 1.1.0
 Author URI: http://ninjax.cc/
 
-Copyright 2013 megumithemes (email : info@ninjax.cc)
+Copyright 2013 Ninjax Team (email : info@ninjax.cc)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -41,6 +41,10 @@ public function init()
 
 public function plugins_loaded()
 {
+    if (is_admin()) {
+        add_action('admin_init', array($this, 'admin_init'));
+    }
+
     if (defined('IS_AMIMOTO') && IS_AMIMOTO === true) {
         $this->amimoto_support(); // see http://megumi-cloud.com/
     }
@@ -69,6 +73,23 @@ public function plugins_loaded()
             array($this, 'nginxchampuru_get_the_url')
         );
     }
+}
+
+public function admin_init()
+{
+    if (function_exists('is_plugin_inactive') && is_plugin_inactive($this->nginxcc)) {
+        add_action('admin_notices', array($this, 'admin_notice'));
+    }
+}
+
+public function admin_notice()
+{
+    $install_url = admin_url('plugin-install.php?tab=search&s=nginx-champuru&plugin-search-input=Search+Plugins');
+    ?>
+    <div class="error">
+        <p>Nginx Mobile Theme is requires <strong>Nginx Cache Controller</strong>. <a href="<?php echo $install_url; ?>">Please click to install.</a></p>
+    </div>
+    <?php
 }
 
 public function customize_register($wp_customize)

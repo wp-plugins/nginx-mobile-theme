@@ -3,7 +3,7 @@ Contributors: miyauchi,megumithemes
 Tags: nginx, mobile, theme, smartphone, tablet, iphone, ipad, android
 Requires at least: 3.7.1
 Tested up to: 3.7.1
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 
 This plugin allows you to switch theme according to the User Agent on the Nginx reverse proxy.
 
@@ -63,12 +63,12 @@ Your custom plugin:
     return array('@smartphone', '@tablet');
 });`
 
-3. As a result, allow you to select theme for @smartphone and @tablet individually in the theme-customizer.
+* As a result, allow you to select theme for @smartphone and @tablet individually in the theme-customizer.
 
 = Amimoto Support =
 The [Amimoto](http://megumi-cloud.com/) is a full-tuned WordPress AMI on the AWS EC2.
 
-1. Uncomment /etc/nginx/conf.d/default.conf in line 17
+* Uncomment /etc/nginx/conf.d/default.conf in line 17
 
 before:
 `#include /etc/nginx/mobile-detect;`
@@ -76,7 +76,7 @@ before:
 after:
 `include /etc/nginx/mobile-detect;`
 
-2. Add line to /etc/nginx/nginx.conf like following.
+* Add line to /etc/nginx/nginx.conf like following.
 
 before:
 `proxy_set_header  X-Forwarded-For    $proxy_add_x_forwarded_for;
@@ -87,7 +87,7 @@ after:
 proxy_set_header  Accept-Encoding    "";
 proxy_set_header  X-UA-Detect        $mobile; # add new line`
 
-3. Define constant in the wp-config.php
+* Define constant in the wp-config.php
 
 `define('IS_AMIMOTO', true);`
 
@@ -101,6 +101,12 @@ proxy_set_header  X-UA-Detect        $mobile; # add new line`
 1. theme-customizer
 
 == Changelog ==
+
+= 1.1.0 =
+* Add support child theme.
+* Add notice when Nginx Cache Controller is not activated.
+
+https://github.com/megumiteam/nginx-mobile-theme/compare/1.0.0...1.1.0
 
 = 1.0.0 =
 * first release.
