@@ -1,4 +1,4 @@
-=== Nginx Mobile Themes ===
+=== Nginx Mobile Theme ===
 Contributors: miyauchi,megumithemes
 Tags: nginx, mobile, theme, smartphone, tablet, iphone, ipad, android
 Requires at least: 3.7.1
