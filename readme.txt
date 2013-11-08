@@ -63,12 +63,12 @@ Your custom plugin:
     return array('@smartphone', '@tablet');
 });`
 
-3. As a result, allow you to select theme for @smartphone and @tablet individually in the theme-customizer.
+* As a result, allow you to select theme for @smartphone and @tablet individually in the theme-customizer.
 
 = Amimoto Support =
 The [Amimoto](http://megumi-cloud.com/) is a full-tuned WordPress AMI on the AWS EC2.
 
-1. Uncomment /etc/nginx/conf.d/default.conf in line 17
+* Uncomment /etc/nginx/conf.d/default.conf in line 17
 
 before:
 `#include /etc/nginx/mobile-detect;`
@@ -76,7 +76,7 @@ before:
 after:
 `include /etc/nginx/mobile-detect;`
 
-2. Add line to /etc/nginx/nginx.conf like following.
+* Add line to /etc/nginx/nginx.conf like following.
 
 before:
 `proxy_set_header  X-Forwarded-For    $proxy_add_x_forwarded_for;
@@ -87,7 +87,7 @@ after:
 proxy_set_header  Accept-Encoding    "";
 proxy_set_header  X-UA-Detect        $mobile; # add new line`
 
-3. Define constant in the wp-config.php
+* Define constant in the wp-config.php
 
 `define('IS_AMIMOTO', true);`
 
