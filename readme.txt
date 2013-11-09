@@ -25,7 +25,8 @@ Nginx Mobile Theme is requires as follows.
 
 Add mobile device detection to the nginx.conf like following.
 
-`if ($http_user_agent ~* '(iPhone|iPod|incognito|webmate|Android|dream|CUPCAKE|froyo|BlackBerry|webOS|s8000|bada|IEMobile|Googlebot\-Mobile|AdsBot\-Google)') {
+`set $mobile '';
+if ($http_user_agent ~* '(iPhone|iPod|incognito|webmate|Android|dream|CUPCAKE|froyo|BlackBerry|webOS|s8000|bada|IEMobile|Googlebot\-Mobile|AdsBot\-Google)') {
     set $mobile "@smartphone";
 }`
 
@@ -51,7 +52,8 @@ Nginx Mobile Theme will switch theme when '@smartphone' is received in the `$_SE
 2. Add custom mobile detection to the WordPress via `nginxmobile_mobile_detects` filter-hook.
 
 nginx.conf:
-`if ($http_user_agent ~* '(iPhone|iPod)') {
+`set $mobile '';
+if ($http_user_agent ~* '(iPhone|iPod)') {
     set $mobile "@smartphone";
 }
 if ($http_user_agent ~* 'iPad') {
