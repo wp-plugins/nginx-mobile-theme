@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Megumi_ThemeCustomizerControl' => array($vendorDir . '/megumi/theme_customizer_control/lib'),
     'Megumi_SwitchTheme' => array($vendorDir . '/megumi/switch_theme/lib'),
 );
