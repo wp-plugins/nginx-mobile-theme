@@ -1,9 +1,9 @@
-=== Nginx Mobile Themes ===
+=== Nginx Mobile Theme ===
 Contributors: miyauchi,megumithemes
 Tags: nginx, mobile, theme, smartphone, tablet, iphone, ipad, android
 Requires at least: 3.7.1
-Tested up to: 3.7.1
-Stable tag: 1.0.0
+Tested up to: 3.9
+Stable tag: 1.6.0
 
 This plugin allows you to switch theme according to the User Agent on the Nginx reverse proxy.
 
@@ -11,25 +11,28 @@ This plugin allows you to switch theme according to the User Agent on the Nginx 
 
 This plugin allows you to switch theme according to the User Agent on the Nginx reverse proxy.
 
-Nginx Mobile Theme is requires as follows.
+Nginx Mobile Theme's requirements are as follows.
 
 * PHP 5.3 or later
 * WordPress 3.7 or later
 * [Nginx Cache Controller](http://wordpress.org/plugins/nginx-champuru/) 2.0.0 or later
 
-* You can flush mobile's and pc's each caches automatically via [Nginx Cache Controller](http://wordpress.org/plugins/nginx-champuru/)
+= Some Features =
+
+* You can flush mobile's and pc's each caches automatically via [Nginx Cache Controller](http://wordpress.org/plugins/nginx-champuru/).
 * Allow you to switch theme according to the user-agent.
 * Allow you to customize multiple mobile device support via filter-hook.
 
 = Nginx Configuration =
 
-Add mobile device detection to the nginx.conf like following.
+Add mobile device detection to the nginx.conf.
 
-`if ($http_user_agent ~* '(iPhone|iPod|incognito|webmate|Android|dream|CUPCAKE|froyo|BlackBerry|webOS|s8000|bada|IEMobile|Googlebot\-Mobile|AdsBot\-Google)') {
+`set $mobile '';
+if ($http_user_agent ~* '(iPhone|iPod|incognito|webmate|Android|dream|CUPCAKE|froyo|BlackBerry|webOS|s8000|bada|IEMobile|Googlebot\-Mobile|AdsBot\-Google)') {
     set $mobile "@smartphone";
 }`
 
-Set proxy_cache_key like following.
+Set proxy_cache_key.
 
 `proxy_cache_key "$mobile$scheme://$host$request_uri";`
 
@@ -51,24 +54,25 @@ Nginx Mobile Theme will switch theme when '@smartphone' is received in the `$_SE
 2. Add custom mobile detection to the WordPress via `nginxmobile_mobile_detects` filter-hook.
 
 nginx.conf:
-`if ($http_user_agent ~* '(iPhone|iPod)') {
+`set $mobile '';
+if ($http_user_agent ~* '(iPhone|iPod)') {
     set $mobile "@smartphone";
 }
 if ($http_user_agent ~* 'iPad') {
     set $mobile "@tablet";
 }`
 
-Your custom plugin:
+In your custom plugin:
 `add_filter('nginxmobile_mobile_detects', function(){
     return array('@smartphone', '@tablet');
 });`
 
-3. As a result, allow you to select theme for @smartphone and @tablet individually in the theme-customizer.
+* As a result, allow you to select theme for @smartphone and @tablet individually in the theme-customizer.
 
 = Amimoto Support =
 The [Amimoto](http://megumi-cloud.com/) is a full-tuned WordPress AMI on the AWS EC2.
 
-1. Uncomment /etc/nginx/conf.d/default.conf in line 17
+* Uncomment /etc/nginx/conf.d/default.conf in line 17
 
 before:
 `#include /etc/nginx/mobile-detect;`
@@ -76,7 +80,7 @@ before:
 after:
 `include /etc/nginx/mobile-detect;`
 
-2. Add line to /etc/nginx/nginx.conf like following.
+* Add line to /etc/nginx/nginx.conf like following.
 
 before:
 `proxy_set_header  X-Forwarded-For    $proxy_add_x_forwarded_for;
@@ -87,7 +91,7 @@ after:
 proxy_set_header  Accept-Encoding    "";
 proxy_set_header  X-UA-Detect        $mobile; # add new line`
 
-3. Define constant in the wp-config.php
+* Define constant in the wp-config.php
 
 `define('IS_AMIMOTO', true);`
 
@@ -101,6 +105,24 @@ proxy_set_header  X-UA-Detect        $mobile; # add new line`
 1. theme-customizer
 
 == Changelog ==
+
+= 1.5.0 =
+* [Bug fix.](https://github.com/megumiteam/nginx-mobile-theme/compare/1.4.0...1.5.0)
+
+= 1.4.0 =
+* [Bug fix.](https://github.com/megumiteam/nginx-mobile-theme/compare/1.3.0...1.4.0)
+
+= 1.3.0 =
+* [Bug fix.](https://github.com/megumiteam/nginx-mobile-theme/compare/1.2.0...1.3.0)
+
+= 1.2.0 =
+* [Add mobile theme preview.](https://github.com/megumiteam/nginx-mobile-theme/compare/1.1.0...1.2.0)
+
+= 1.1.0 =
+* Add support child theme.
+* Add notice when Nginx Cache Controller is not activated.
+
+https://github.com/megumiteam/nginx-mobile-theme/compare/1.0.0...1.1.0
 
 = 1.0.0 =
 * first release.
